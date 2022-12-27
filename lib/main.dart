@@ -9,6 +9,7 @@ import 'checkout.dart';
 import 'home.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/services.dart';
+import 'notifications.dart';
 
 void main() {
   runApp(MyApp());
@@ -22,6 +23,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+        debugShowCheckedModeBanner: false,
         title: _title,
         home: MyStatefulWidget(),
         theme: ThemeData(
@@ -71,7 +73,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
     Home(),
     Category(),
     Cart(),
-    SignUp(),
+    Notifications(),
   ];
 
   void _onItemTapped(int index) {
@@ -114,100 +116,114 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
         child: _widgetOptions.elementAt(_selectedIndex),
       ),
       floatingActionButtonLocation: showBtmAppBr
-          ? FloatingActionButtonLocation.centerDocked
-          : FloatingActionButtonLocation.centerFloat,
+          ? FloatingActionButtonLocation.endFloat
+          : FloatingActionButtonLocation.startDocked,
       floatingActionButton: FloatingActionButton(
         backgroundColor: Color.fromARGB(255, 103, 191, 249),
         onPressed: () {},
         child: const Icon(
-          Icons.add,
+          CupertinoIcons.chat_bubble,
           color: Colors.white,
         ),
       ),
       bottomNavigationBar: AnimatedContainer(
-        child: BottomAppBar(
-          notchMargin: 8.0,
-          shape: const CircularNotchedRectangle(),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: [
-              IconButton(
-                onPressed: () {
-                  _onItemTapped(0);
-                },
-                icon: Icon(CupertinoIcons.home,
-                    color: _selectedIndex == 0
-                        ? Color(0xffF473B9)
-                        : Color.fromARGB(255, 233, 211, 234)),
-              ),
-              IconButton(
-                onPressed: () {
-                  _onItemTapped(1);
-                },
-                icon: Icon(
-                  CupertinoIcons.list_bullet,
-                  color: _selectedIndex == 1
-                      ? Color(0xffF473B9)
-                      : Color.fromARGB(255, 233, 211, 234),
-                ),
-              ),
-              const SizedBox(
-                width: 50,
-              ),
-              IconButton(
-                onPressed: () {
-                  _onItemTapped(2);
-                },
-                icon: Icon(CupertinoIcons.cart,
-                    color: _selectedIndex == 2
-                        ? Color(0xffF473B9)
-                        : Color.fromARGB(255, 233, 211, 234)),
-              ),
-              IconButton(
-                onPressed: () {
-                  _onItemTapped(3);
-                },
-                icon: Icon(CupertinoIcons.bell,
-                    color: _selectedIndex == 3
-                        ? Color(0xffF473B9)
-                        : Color.fromARGB(255, 233, 211, 234)),
-              ),
-            ],
-          ),
-        ),
+        child: createBottomNavigation(),
         duration: const Duration(
           milliseconds: 800,
         ),
         curve: Curves.easeInOutSine,
         height: showBtmAppBr ? 70 : 0,
       ),
-      // bottomNavigationBar: SizedBox(
-      //   height: MediaQuery.of(context).size.height * 0.08,
-      //   child: BottomNavigationBar(
-      //     items: const <BottomNavigationBarItem>[
-      //       BottomNavigationBarItem(
-      //         icon: Icon(Icons.home_outlined),
-      //         label: 'Trang chủ',
-      //       ),
-      //       BottomNavigationBarItem(
-      //         icon: Icon(Icons.shop_2_outlined),
-      //         label: 'Danh mục',
-      //       ),
-      //       BottomNavigationBarItem(
-      //         icon: Icon(Icons.shopping_cart_outlined),
-      //         label: 'Giỏ hàng',
-      //       ),
-      //       BottomNavigationBarItem(
-      //         icon: Icon(Icons.notifications_active_outlined),
-      //         label: 'Thông báo',
-      //       ),
-      //     ],
-      //     currentIndex: _selectedIndex,
-      //     unselectedItemColor: Color.fromARGB(255, 181, 192, 213),
-      //     selectedItemColor: Color(0xffF473B9),
-      //     onTap: _onItemTapped,
-      //   ),
-      // )
+    );
+  }
+
+  createBottomNavigation() {
+    return BottomNavigationBar(
+      items: const <BottomNavigationBarItem>[
+        BottomNavigationBarItem(
+          icon: Icon(CupertinoIcons.home),
+          label: 'Trang chủ',
+        ),
+        BottomNavigationBarItem(
+          icon: Icon(CupertinoIcons.square_list),
+          label: 'Danh mục',
+        ),
+        BottomNavigationBarItem(
+          icon: Icon(CupertinoIcons.cart),
+          label: 'Giỏ hàng',
+        ),
+        BottomNavigationBarItem(
+          icon: Icon(CupertinoIcons.bell),
+          label: 'Thông báo',
+        ),
+      ],
+      currentIndex: _selectedIndex,
+      unselectedItemColor: Color.fromARGB(255, 181, 192, 213),
+      selectedItemColor: Color(0xffF473B9),
+      onTap: _onItemTapped,
+    );
+  }
+
+  createBottomAppBar() {
+    return BottomAppBar(
+      shape: const CircularNotchedRectangle(),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceAround,
+        children: [
+          IconButton(
+            onPressed: () {
+              setState(() {
+                _selectedIndex = 0;
+              });
+            },
+            icon: Icon(
+              Icons.home_outlined,
+              color: _selectedIndex == 0
+                  ? Color(0xffF473B9)
+                  : Color.fromARGB(255, 181, 192, 213),
+            ),
+          ),
+          IconButton(
+            onPressed: () {
+              setState(() {
+                _selectedIndex = 1;
+              });
+            },
+            icon: Icon(
+              Icons.shop_2_outlined,
+              color: _selectedIndex == 1
+                  ? Color(0xffF473B9)
+                  : Color.fromARGB(255, 181, 192, 213),
+            ),
+          ),
+          IconButton(
+            onPressed: () {
+              setState(() {
+                _selectedIndex = 2;
+              });
+            },
+            icon: Icon(
+              Icons.shopping_cart_outlined,
+              color: _selectedIndex == 2
+                  ? Color(0xffF473B9)
+                  : Color.fromARGB(255, 181, 192, 213),
+            ),
+          ),
+          IconButton(
+            onPressed: () {
+              setState(() {
+                _selectedIndex = 3;
+              });
+            },
+            icon: Icon(
+              Icons.notifications_active_outlined,
+              color: _selectedIndex == 3
+                  ? Color(0xffF473B9)
+                  : Color.fromARGB(255, 181, 192, 213),
+            ),
+          ),
+        ],
+      ),
     );
   }
 

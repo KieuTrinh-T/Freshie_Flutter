@@ -41,27 +41,31 @@ class _CartState extends State<Cart> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Center(
-          child: Column(children: <Widget>[
-        SingleChildScrollView(
-          controller: _CartScrollController,
-          child: Container(
-            height: MediaQuery.of(context).size.height * 0.7,
-            width: MediaQuery.of(context).size.width,
-            child: ListView.builder(
-                itemCount: _cartItems.length,
-                itemBuilder: (BuildContext context, int index) =>
-                    createCart(context, index)),
-          ),
-        ),
-        Container(
-            color: Color(0xff3AB0FF),
-            height: MediaQuery.of(context).size.height * 0.1,
-            child: Align(
-              alignment: Alignment.bottomRight,
-              child: createCheckout(context),
-            )),
-      ])),
+      body: LayoutBuilder(
+          builder: (p0, p1) => Column(children: <Widget>[
+                SingleChildScrollView(
+                  controller: _CartScrollController,
+                  child: Container(
+                    height: MediaQuery.of(context).size.height * 0.7,
+                    width: MediaQuery.of(context).size.width,
+                    child: ListView.builder(
+                        itemCount: _cartItems.length,
+                        itemBuilder: (BuildContext context, int index) =>
+                            createCart(context, index)),
+                  ),
+                ),
+                SizedBox(
+                    height: MediaQuery.of(context).size.height -
+                        0.7 * MediaQuery.of(context).size.height -
+                        AppBar().preferredSize.height -
+                        80,
+                    child: Container(
+                        color: Color(0xffF473B9),
+                        child: Align(
+                          alignment: Alignment.topLeft,
+                          child: createCheckout(context),
+                        ))),
+              ])),
     );
   }
 
@@ -123,19 +127,6 @@ class _CartState extends State<Cart> {
                       });
                     },
                   ),
-                  IconButton(
-                    icon: const Icon(
-                      Icons.delete,
-                      color: Colors.red,
-                    ),
-                    style:
-                        IconButton.styleFrom(alignment: Alignment.centerLeft),
-                    onPressed: () {
-                      setState(() {
-                        _cartItems.removeAt(index);
-                      });
-                    },
-                  )
                 ],
               ),
             ),
@@ -150,47 +141,52 @@ class _CartState extends State<Cart> {
     for (var item in _cartItems) {
       total += item.price.toInt() * item.quantity;
     }
-    return Container(
-      padding: const EdgeInsets.all(0),
-      child: Row(
-        children: <Widget>[
-          Expanded(
-            flex: 2,
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: <Widget>[
-                Text(
-                    "Tổng tiền: " +
-                        total.toString().replaceAllMapped(
-                            new RegExp(r'(\d{1,3})(?=(\d{3})+(?!\d))'),
-                            (Match m) => '${m[1]}.') +
-                        " VND",
-                    style: const TextStyle(
-                        fontWeight: FontWeight.bold,
-                        color: Color.fromRGBO(255, 255, 255, 1))),
-              ],
-            ),
-          ),
-          Container(
-            margin: const EdgeInsets.only(right: 30),
-            child: Expanded(
-              flex: 1,
-              child: ElevatedButton(
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: Color(0xffF473B9),
+    return Align(
+        alignment: Alignment.topLeft,
+        child: Container(
+          padding: const EdgeInsets.only(left: 30),
+          child: Row(
+            children: <Widget>[
+              Expanded(
+                flex: 2,
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: <Widget>[
+                    Text(
+                        "Tổng: " +
+                            total.toString().replaceAllMapped(
+                                new RegExp(r'(\d{1,3})(?=(\d{3})+(?!\d))'),
+                                (Match m) => '${m[1]}.') +
+                            " VND",
+                        style: const TextStyle(
+                            fontWeight: FontWeight.bold,
+                            color: Color.fromRGBO(255, 255, 255, 1))),
+                  ],
                 ),
-                onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => Checkout()),
-                  );
-                },
-                child: const Text('Thanh toán'),
               ),
-            ),
-          )
-        ],
-      ),
-    );
+              Container(
+                height: AppBar().preferredSize.height * 0.8,
+                margin: const EdgeInsets.only(right: 100),
+                child: Expanded(
+                  flex: 1,
+                  child: ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: Color.fromARGB(255, 240, 224, 233),
+                      foregroundColor: Color(0xffF473B9),
+                    ),
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => Checkout()),
+                      );
+                    },
+                    child: const Text('Thanh toán'),
+                  ),
+                ),
+              )
+            ],
+          ),
+        ));
   }
 }
