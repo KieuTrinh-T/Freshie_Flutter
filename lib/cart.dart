@@ -38,6 +38,23 @@ class _CartState extends State<Cart> {
         467000,
         "assets/images/4.webp"),
   ];
+  showDeleteMenu(BuildContext context, int index) {
+    final item = _cartItems[index];
+    return PopupMenuButton(
+      itemBuilder: (context) => [
+        PopupMenuItem(
+          value: 1,
+          child: Icon(Icons.delete),
+        ),
+      ],
+      onSelected: (value) {
+        setState(() {
+          _cartItems.removeAt(index);
+        });
+      },
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -46,7 +63,9 @@ class _CartState extends State<Cart> {
                 SingleChildScrollView(
                   controller: _CartScrollController,
                   child: Container(
-                    height: MediaQuery.of(context).size.height * 0.7,
+                    height: MediaQuery.of(context).size.height -
+                        AppBar().preferredSize.height -
+                        120,
                     width: MediaQuery.of(context).size.width,
                     child: ListView.builder(
                         itemCount: _cartItems.length,
@@ -55,10 +74,6 @@ class _CartState extends State<Cart> {
                   ),
                 ),
                 SizedBox(
-                    height: MediaQuery.of(context).size.height -
-                        0.7 * MediaQuery.of(context).size.height -
-                        AppBar().preferredSize.height -
-                        100,
                     child: Container(
                         color: Color(0xffF473B9),
                         child: Align(
@@ -71,7 +86,20 @@ class _CartState extends State<Cart> {
 
   Widget createCart(BuildContext context, int index) {
     final item = _cartItems[index];
-    return Container(
+    return Dismissible(
+      key: Key(item.title),
+      onDismissed: (direction) {
+        setState(() {
+          _cartItems.removeAt(index);
+        });
+        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+          content: Text("Đã xóa sản phẩm"),
+        ));
+      },
+      background: Container(
+        color: Colors.red,
+        child: Icon(Icons.delete),
+      ),
       child: Card(
         child: Row(
           children: <Widget>[

@@ -225,9 +225,23 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
     );
   }
 
+  String getPageTitle() {
+    if (_selectedIndex == 0) {
+      return 'Trang chủ';
+    } else if (_selectedIndex == 1) {
+      return 'Danh mục';
+    } else if (_selectedIndex == 2) {
+      return 'Giỏ hàng';
+    } else if (_selectedIndex == 3) {
+      return 'Thông báo';
+    } else {
+      return 'Trang chủ';
+    }
+  }
+
   createAppBar(BuildContext context, String title) {
     return AppBar(
-      title: _searchBoolean ? _searchTextField() : Text(title),
+      title: _searchBoolean ? _searchTextField() : Text(getPageTitle()),
       actions: [
         !_searchBoolean
             ? IconButton(
@@ -381,7 +395,7 @@ class FabExt extends StatelessWidget {
             SizedBox(width: showFabTitle ? 12.0 : 0),
             AnimatedContainer(
               duration: const Duration(seconds: 2),
-              child: showFabTitle ? const Text("Go to cart") : const SizedBox(),
+              child: showFabTitle ? const Text("Go to chat") : const SizedBox(),
             )
           ],
         ),

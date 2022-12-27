@@ -140,46 +140,52 @@ class _EditProfileUIState extends State<EditProfileUI> {
               SizedBox(height: 20),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  OutlinedButton(
-                    onPressed: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => Home(),
-                        ),
-                      );
-                    },
-                    child: Text("Hủy",
-                        style: TextStyle(
-                          fontSize: 15,
-                          letterSpacing: 2,
-                          color: Colors.black,
-                        )),
-                    style: OutlinedButton.styleFrom(
-                        padding: EdgeInsets.symmetric(horizontal: 50),
-                        shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(20))),
+                  Container(
+                    height: 40,
+                    child: OutlinedButton(
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => Home(),
+                          ),
+                        );
+                      },
+                      child: Text("Hủy",
+                          style: TextStyle(
+                            fontSize: 15,
+                            letterSpacing: 2,
+                            color: Colors.black,
+                          )),
+                      style: OutlinedButton.styleFrom(
+                          padding: EdgeInsets.symmetric(horizontal: 50),
+                          shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(20))),
+                    ),
                   ),
-                  ElevatedButton(
-                    onPressed: () => DialogUtils.showCustomDialog(context,
-                        title: "Đã lưu thông tin thành công",
-                        okBtnFunction: () => Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => MyStatefulWidget()))),
-                    child: Text("Lưu",
-                        style: TextStyle(
-                          fontSize: 15,
-                          letterSpacing: 2,
-                          color: Colors.white,
-                        )),
-                    style: ElevatedButton.styleFrom(
-                        primary: Colors.blue,
-                        padding: EdgeInsets.symmetric(horizontal: 50),
-                        shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(20))),
-                  ),
+                  Container(
+                      height: 40,
+                      child: ElevatedButton(
+                        onPressed: () => DialogUtils.showCustomDialog(context,
+                            title: "Đã lưu thông tin thành công",
+                            okBtnFunction: () => Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => MyStatefulWidget()))),
+                        child: Text("Lưu",
+                            style: TextStyle(
+                              fontSize: 15,
+                              letterSpacing: 2,
+                              color: Colors.white,
+                            )),
+                        style: ElevatedButton.styleFrom(
+                            primary: Colors.blue,
+                            padding: EdgeInsets.symmetric(horizontal: 50),
+                            shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(20))),
+                      )),
                 ],
               )
             ],

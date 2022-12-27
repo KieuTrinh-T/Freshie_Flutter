@@ -650,7 +650,6 @@ class ForYou extends StatelessWidget {
               foryou.productName,
               textAlign: TextAlign.left,
               style: TextStyle(
-                fontWeight: FontWeight.bold,
                 color: Colors.black,
               ),
             ),
