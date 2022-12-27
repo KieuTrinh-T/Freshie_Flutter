@@ -259,7 +259,9 @@ class _CheckoutState extends State<Checkout> {
                     textAlign: TextAlign.left,
                     style: TextStyle(
                         color: Colors.black, fontWeight: FontWeight.bold)),
-                Container()
+                Container(
+                  child: initScreen(),
+                )
               ]))),
               Container(
                 child: Card(
@@ -314,5 +316,78 @@ class _CheckoutState extends State<Checkout> {
             ]),
           ],
         )));
+  }
+
+  Widget initScreen() {
+    return new Container(
+      child: Wrap(children: <Widget>[
+        Container(
+          height: 220.0,
+          child: ListView(
+            children: <Widget>[
+              dummyDataOfListView(
+                  "assets/images/sanpham1.jpeg",
+                  "Kem dưỡng da Vitamin Tree Water-Gel",
+                  "350.000 đ",
+                  "Số lượng: 1"),
+              dummyDataOfListView(
+                  "assets/images/sanpham2.jpg",
+                  "Mặt nạ BNBG Whitening Stem Cell Collagen",
+                  "180.000 đ",
+                  "Số lượng: 2"),
+            ],
+          ),
+        ),
+      ]),
+    );
+  }
+
+  dummyDataOfListView(
+      String imgSrc, String itemName, String itemPrice, String itemCount) {
+    return Container(
+      child: Card(
+        elevation: 4.0,
+        margin:
+            EdgeInsets.only(top: 10.0, left: 20.0, right: 20.0, bottom: 5.0),
+        color: Color(0xffFFFFFF),
+        child: ListTile(
+          // on ListItem clicked
+          onTap: () {},
+
+          // Image of ListItem
+          leading: Container(
+            child: Image(
+              fit: BoxFit.fitHeight,
+              image: AssetImage(imgSrc),
+            ),
+          ),
+          // Lists of titles
+          title: Container(
+            margin: EdgeInsets.only(top: 10.0),
+            height: 80.0,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: <Widget>[
+                Container(
+                  padding: EdgeInsets.only(bottom: 2.0),
+                  child: Text(
+                    itemName,
+                    style:
+                        TextStyle(fontWeight: FontWeight.bold, fontSize: 20.0),
+                  ),
+                ),
+                Container(
+                  padding: EdgeInsets.only(bottom: 3.0),
+                  child: Text(
+                    itemPrice,
+                    style: TextStyle(color: Color(0xff374ABE)),
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ),
+      ),
+    );
   }
 }
