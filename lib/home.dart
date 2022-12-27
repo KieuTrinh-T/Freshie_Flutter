@@ -484,7 +484,6 @@ class Newest extends StatelessWidget {
             newest.productName,
             style: TextStyle(
               color: Colors.black,
-              fontSize: 14,
             ),
           ),
         ],
@@ -510,7 +509,7 @@ const List<bestseller> bestsellers = const <bestseller>[
       productImage: 'assets/images/newest1.jpg',
       sold: 'Đã bán 100'),
   const bestseller(
-      productName: 'Balance Vitamin C',
+      productName: 'Serum Balance Vitamin C',
       productImage: 'assets/images/newest2.png',
       sold: 'Đã bán 200'),
   const bestseller(
@@ -541,14 +540,13 @@ class Bestseller extends StatelessWidget {
             bestseller.productName,
             style: TextStyle(
               color: Colors.black,
-              fontSize: 14,
             ),
           ),
           Text(
             bestseller.sold,
+            textAlign: TextAlign.start,
             style: TextStyle(
               color: Colors.black,
-              fontSize: 12,
             ),
           ),
         ],
@@ -586,7 +584,7 @@ const List<foryou> foryous = const <foryou>[
       productRating: 4.5,
       productRatingCount: 100),
   const foryou(
-      productName: 'Balance Vitamin C',
+      productName: 'Serum Balance Vitamin C',
       productImage: 'assets/images/newest2.png',
       productPrice: 200000,
       productDiscount: '-20%',
@@ -650,9 +648,10 @@ class ForYou extends StatelessWidget {
             height: 20,
             child: Text(
               foryou.productName,
+              textAlign: TextAlign.left,
               style: TextStyle(
+                fontWeight: FontWeight.bold,
                 color: Colors.black,
-                fontSize: 14,
               ),
             ),
           ),
@@ -708,9 +707,16 @@ class ForYou extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
-                  foryou.productPrice.toString(),
+                  foryou.productPrice
+                          .toInt()
+                          .toString()
+                          .toString()
+                          .replaceAllMapped(
+                              new RegExp(r'(\d{1,3})(?=(\d{3})+(?!\d))'),
+                              (Match m) => '${m[1]}.') +
+                      " VND",
                   style: TextStyle(
-                      color: Colors.black,
+                      color: Colors.pink,
                       fontSize: 14,
                       fontWeight: FontWeight.bold),
                 ),

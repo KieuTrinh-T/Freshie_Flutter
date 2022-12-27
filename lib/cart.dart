@@ -58,7 +58,7 @@ class _CartState extends State<Cart> {
                     height: MediaQuery.of(context).size.height -
                         0.7 * MediaQuery.of(context).size.height -
                         AppBar().preferredSize.height -
-                        80,
+                        100,
                     child: Container(
                         color: Color(0xffF473B9),
                         child: Align(
