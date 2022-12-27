@@ -714,7 +714,7 @@ class ForYou extends StatelessWidget {
                           .replaceAllMapped(
                               new RegExp(r'(\d{1,3})(?=(\d{3})+(?!\d))'),
                               (Match m) => '${m[1]}.') +
-                      " VND",
+                      "đ",
                   style: TextStyle(
                       color: Colors.pink,
                       fontSize: 14,

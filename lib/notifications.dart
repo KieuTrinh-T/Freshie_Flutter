@@ -13,25 +13,6 @@ class _NotificationsState extends State<Notifications> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Thông báo'),
-        leading: IconButton(
-          icon: const Icon(Icons.arrow_back),
-          color: Colors.white,
-          onPressed: () {
-            Navigator.pop(context);
-          },
-        ),
-        actions: [
-          IconButton(
-            icon: const Icon(Icons.settings),
-            color: Colors.white,
-            onPressed: () {
-              Navigator.pop(context);
-            },
-          ),
-        ],
-      ),
       body: createListView(),
     );
   }

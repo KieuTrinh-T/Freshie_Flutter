@@ -173,14 +173,14 @@ class _CategoryState extends State<Category> {
                         TextButton(
                           onPressed: () {},
                           child: const Text(
-                            'HAIRCARE',
+                            'SKINCARE',
                             style: TextStyle(color: Colors.blue),
                           ),
                         ),
                         TextButton(
                           onPressed: () {},
                           child: const Text(
-                            'SKINCARE',
+                            'HAIRCARE',
                             style: TextStyle(color: Colors.grey),
                           ),
                         ),

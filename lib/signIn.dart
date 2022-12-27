@@ -19,7 +19,7 @@ class _SignInState extends State<SignIn> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: const Text("Login Page"),
+          title: const Text("Đăng nhập"),
         ),
         body: SingleChildScrollView(
             child: Container(
@@ -28,7 +28,7 @@ class _SignInState extends State<SignIn> {
           children: <Widget>[
             Container(
               margin: const EdgeInsets.only(bottom: 20),
-              height: MediaQuery.of(context).size.height * 0.3,
+              height: MediaQuery.of(context).size.height * 0.2,
               decoration: const BoxDecoration(
                 color: Color(0xff3AB0FF),
               ),
@@ -37,8 +37,8 @@ class _SignInState extends State<SignIn> {
                   children: <Widget>[
                     new Image.asset(
                       'assets/images/logo_freshie.png',
-                      width: 100,
-                      height: 100,
+                      width: 80,
+                      height: 80,
                     ),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
@@ -47,10 +47,10 @@ class _SignInState extends State<SignIn> {
                         Padding(
                             padding: EdgeInsets.fromLTRB(10, 10, 10, 15),
                             child: Text(
-                              "Sign in",
+                              "Chào mừng bạn trở lại!",
                               style: TextStyle(
                                   color: Colors.white,
-                                  fontSize: 50,
+                                  fontSize: 30,
                                   fontWeight: FontWeight.bold),
                             )),
                       ],
@@ -64,14 +64,13 @@ class _SignInState extends State<SignIn> {
               child: TextField(
                 controller: _username,
                 decoration: InputDecoration(
-                  errorText:
-                      (_nameValidate) ? 'Username Can\'t Be Empty' : null,
+                  errorText: (_nameValidate) ? 'Bạn chưa nhập email' : null,
                   filled: true,
                   fillColor: Color.fromARGB(255, 237, 236, 236),
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(10),
                   ),
-                  hintText: 'Enter your email or phone number',
+                  hintText: 'Số điện thoại hoặc email',
                   hintStyle: TextStyle(
                     fontSize: 13,
                     color: Color.fromARGB(255, 146, 144, 144),
@@ -87,8 +86,7 @@ class _SignInState extends State<SignIn> {
                 controller: _pas,
                 obscureText: passenable,
                 decoration: InputDecoration(
-                  errorText:
-                      (_passValidate) ? 'Password Can\'t Be Empty' : null,
+                  errorText: (_passValidate) ? 'Bạn chưa nhập mật khẩu' : null,
                   filled: true,
                   fillColor: Color.fromARGB(255, 237, 236, 236),
                   border: OutlineInputBorder(
@@ -111,7 +109,7 @@ class _SignInState extends State<SignIn> {
                       icon: Icon(passenable == true
                           ? Icons.remove_red_eye
                           : Icons.remove_red_eye_outlined)),
-                  hintText: 'Enter your password',
+                  hintText: 'Mât khẩu',
                   hintStyle: TextStyle(
                     fontSize: 13,
                     color: Color.fromARGB(255, 146, 144, 144),
@@ -125,7 +123,7 @@ class _SignInState extends State<SignIn> {
               alignment: Alignment.centerRight,
               padding: EdgeInsets.only(right: 20),
               child: Text(
-                "Forgot Password?",
+                "Quên mật khẩu?",
                 style: TextStyle(
                   color: Color(0xff3AB0FF),
                   decoration: TextDecoration.underline,
@@ -147,7 +145,7 @@ class _SignInState extends State<SignIn> {
                         : _passValidate = false;
                   });
                 },
-                child: Text("Login"),
+                child: Text("Đăng nhập"),
                 style: ElevatedButton.styleFrom(
                   foregroundColor: Colors.white,
                   backgroundColor: Color(0xff3AB0FF),
@@ -168,7 +166,7 @@ class _SignInState extends State<SignIn> {
                     ),
                   ),
                 ),
-                Text("Or"),
+                Text("Đăng nhập bằng"),
                 Expanded(
                   child: Container(
                     margin: EdgeInsets.only(left: 10, right: 20),
@@ -205,7 +203,7 @@ class _SignInState extends State<SignIn> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
                 Text(
-                  "Don't have an account? ",
+                  "Bạn chưa có tài khoản? ",
                   style: TextStyle(
                     color: Color.fromARGB(255, 146, 144, 144),
                   ),
@@ -218,7 +216,7 @@ class _SignInState extends State<SignIn> {
                     );
                   },
                   child: Text(
-                    "Sign up",
+                    "Đăng ký",
                     style: TextStyle(
                       color: Colors.blue,
                       decoration: TextDecoration.underline,

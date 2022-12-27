@@ -112,11 +112,9 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
     return Scaffold(
       appBar: createAppBar(
           context, _widgetOptions.elementAt(_selectedIndex).toString()),
-      body: Center(
-        child: _widgetOptions.elementAt(_selectedIndex),
-      ),
+      body: _widgetOptions.elementAt(_selectedIndex),
       floatingActionButtonLocation: showBtmAppBr
-          ? FloatingActionButtonLocation.endFloat
+          ? FloatingActionButtonLocation.miniEndFloat
           : FloatingActionButtonLocation.startDocked,
       floatingActionButton: FloatingActionButton(
         backgroundColor: Color.fromARGB(255, 103, 191, 249),

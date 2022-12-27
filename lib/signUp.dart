@@ -23,7 +23,7 @@ class _SignUpState extends State<SignUp> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Sign Up Page"),
+        title: const Text("Đăng ký"),
       ),
       body: SingleChildScrollView(
           child: Column(
@@ -31,7 +31,7 @@ class _SignUpState extends State<SignUp> {
         children: <Widget>[
           Container(
             margin: const EdgeInsets.only(bottom: 20),
-            height: MediaQuery.of(context).size.height * 0.3,
+            height: MediaQuery.of(context).size.height * 0.28,
             decoration: const BoxDecoration(
               color: Color(0xffF473B9),
             ),
@@ -40,8 +40,8 @@ class _SignUpState extends State<SignUp> {
                 children: <Widget>[
                   Image.asset(
                     'assets/images/logo_freshie.png',
-                    width: 100,
-                    height: 100,
+                    width: 80,
+                    height: 80,
                   ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
@@ -50,11 +50,13 @@ class _SignUpState extends State<SignUp> {
                       const Padding(
                           padding: EdgeInsets.fromLTRB(10, 10, 10, 10),
                           child: Text(
-                            "Sign Up",
+                            "Chào mừng \n đến với Freshie",
+                            textAlign: TextAlign.center,
                             style: TextStyle(
-                                color: Color.fromARGB(255, 255, 255, 255),
-                                fontSize: 50,
-                                fontWeight: FontWeight.bold),
+                              color: Color.fromARGB(255, 255, 255, 255),
+                              fontSize: 30,
+                              fontWeight: FontWeight.bold,
+                            ),
                           )),
                     ],
                   ),
@@ -132,7 +134,7 @@ class _SignUpState extends State<SignUp> {
                     },
                     icon: Icon(passenable == true
                         ? Icons.remove_red_eye
-                        : Icons.password)),
+                        : Icons.remove_red_eye_outlined)),
                 hintText: 'Nhập mật khẩu của bạn',
                 hintStyle: TextStyle(
                   fontSize: 13,
@@ -172,7 +174,7 @@ class _SignUpState extends State<SignUp> {
                     },
                     icon: Icon(passenable == true
                         ? Icons.remove_red_eye
-                        : Icons.read_more_outlined)),
+                        : Icons.remove_red_eye_outlined)),
                 hintStyle: TextStyle(
                   fontSize: 13,
                   color: Color.fromARGB(255, 146, 144, 144),
@@ -228,7 +230,7 @@ class _SignUpState extends State<SignUp> {
                   );
                 }
               },
-              child: Text("Sign up"),
+              child: Text("Đăng ký"),
               style: ElevatedButton.styleFrom(
                 foregroundColor: Colors.white,
                 backgroundColor: Color(0xffF473B9),
@@ -249,7 +251,7 @@ class _SignUpState extends State<SignUp> {
                   ),
                 ),
               ),
-              Text("Or"),
+              Text("Đăng ký bằng"),
               Expanded(
                 child: Container(
                   margin: EdgeInsets.only(left: 10, right: 20),
@@ -286,14 +288,14 @@ class _SignUpState extends State<SignUp> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
               Text(
-                "Already have an account? ",
+                "Đã có tài khoản? ",
                 style: TextStyle(
                   color: Color.fromARGB(255, 146, 144, 144),
                 ),
               ),
               new GestureDetector(
                 child: Text(
-                  "Sign in",
+                  "Đăng nhập",
                   style: TextStyle(
                     color: Color(0xffF473B9),
                     decoration: TextDecoration.underline,
