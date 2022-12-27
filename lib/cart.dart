@@ -172,7 +172,7 @@ class _CartState extends State<Cart> {
     return Align(
         alignment: Alignment.topLeft,
         child: Container(
-          padding: const EdgeInsets.only(left: 30),
+          padding: const EdgeInsets.only(left: 30, bottom: 10, top: 10),
           child: Row(
             children: <Widget>[
               Expanded(
@@ -194,7 +194,7 @@ class _CartState extends State<Cart> {
                 ),
               ),
               Container(
-                height: AppBar().preferredSize.height * 0.8,
+                height: AppBar().preferredSize.height * 0.5,
                 margin: const EdgeInsets.only(right: 100),
                 child: Expanded(
                   flex: 1,
