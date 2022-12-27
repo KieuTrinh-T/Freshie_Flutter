@@ -13,6 +13,7 @@ class _SignInState extends State<SignIn> {
   final _pas = TextEditingController();
   bool _passValidate = false;
   bool _nameValidate = false;
+  bool passenable = true;
 
   @override
   Widget build(BuildContext context) {
@@ -50,29 +51,12 @@ class _SignInState extends State<SignIn> {
                                   fontSize: 50,
                                   fontWeight: FontWeight.bold),
                             )),
-                        new GestureDetector(
-                            onTap: () {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => SignUp()),
-                              );
-                            },
-                            child: Padding(
-                              padding: EdgeInsets.fromLTRB(10, 10, 10, 25),
-                              child: Text(
-                                "Sign up",
-                                style: TextStyle(
-                                    color: Color.fromARGB(255, 207, 205, 205),
-                                    fontSize: 30),
-                              ),
-                            ))
                       ],
                     ),
                   ]),
             ),
             Container(
-              height: 30,
+              height: 50,
               margin: EdgeInsets.only(bottom: 20),
               width: MediaQuery.of(context).size.width * 0.8,
               child: TextField(
@@ -95,10 +79,11 @@ class _SignInState extends State<SignIn> {
             ),
             Container(
               margin: EdgeInsets.only(bottom: 10),
-              height: 30,
+              height: 50,
               width: MediaQuery.of(context).size.width * 0.8,
               child: TextField(
                 controller: _pas,
+                obscureText: passenable,
                 decoration: InputDecoration(
                   errorText:
                       (_passValidate) ? 'Password Can\'t Be Empty' : null,
@@ -107,6 +92,23 @@ class _SignInState extends State<SignIn> {
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(10),
                   ),
+                  suffix: IconButton(
+                      onPressed: () {
+                        //add Icon button at end of TextField
+                        setState(() {
+                          //refresh UI
+                          if (passenable) {
+                            //if passenable == true, make it false
+                            passenable = false;
+                          } else {
+                            passenable =
+                                true; //if passenable == false, make it true
+                          }
+                        });
+                      },
+                      icon: Icon(passenable == true
+                          ? Icons.remove_red_eye
+                          : Icons.remove_red_eye_outlined)),
                   hintText: 'Enter your password',
                   hintStyle: TextStyle(
                     fontSize: 13,
@@ -123,7 +125,7 @@ class _SignInState extends State<SignIn> {
               child: Text(
                 "Forgot Password?",
                 style: TextStyle(
-                  color: Colors.blue,
+                  color: Color(0xff3AB0FF),
                   decoration: TextDecoration.underline,
                 ),
               ),
@@ -206,11 +208,19 @@ class _SignInState extends State<SignIn> {
                     color: Color.fromARGB(255, 146, 144, 144),
                   ),
                 ),
-                Text(
-                  "Sign up",
-                  style: TextStyle(
-                    color: Colors.blue,
-                    decoration: TextDecoration.underline,
+                new GestureDetector(
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => SignUp()),
+                    );
+                  },
+                  child: Text(
+                    "Sign up",
+                    style: TextStyle(
+                      color: Colors.blue,
+                      decoration: TextDecoration.underline,
+                    ),
                   ),
                 )
               ],

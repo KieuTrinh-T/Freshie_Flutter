@@ -9,10 +9,15 @@ class SignUp extends StatefulWidget {
 }
 
 class _SignUpState extends State<SignUp> {
-  final _username = TextEditingController();
+  final _email = TextEditingController();
+  final _phoneNumber = TextEditingController();
   final _pas = TextEditingController();
-  bool _passValidate = false;
-  bool _nameValidate = false;
+  final _repas = TextEditingController();
+  String _passValidate = '';
+  String _repassValidate = '';
+  String _emailValidate = '';
+  String _phoneValidate = '';
+  bool passenable = true;
 
   @override
   Widget build(BuildContext context) {
@@ -20,7 +25,7 @@ class _SignUpState extends State<SignUp> {
       appBar: AppBar(
         title: const Text("Sign Up Page"),
       ),
-      body: Center(
+      body: SingleChildScrollView(
           child: Column(
         mainAxisAlignment: MainAxisAlignment.start,
         children: <Widget>[
@@ -42,27 +47,12 @@ class _SignUpState extends State<SignUp> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.end,
                     children: <Widget>[
-                      GestureDetector(
-                        onTap: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(builder: (context) => SignIn()),
-                          );
-                        },
-                        child: const Padding(
-                          padding: EdgeInsets.fromLTRB(10, 10, 10, 15),
-                          child: Text(
-                            "Sign In",
-                            style: TextStyle(color: Colors.white, fontSize: 30),
-                          ),
-                        ),
-                      ),
                       const Padding(
                           padding: EdgeInsets.fromLTRB(10, 10, 10, 10),
                           child: Text(
                             "Sign Up",
                             style: TextStyle(
-                                color: Color.fromARGB(255, 207, 205, 205),
+                                color: Color.fromARGB(255, 255, 255, 255),
                                 fontSize: 50,
                                 fontWeight: FontWeight.bold),
                           )),
@@ -71,19 +61,19 @@ class _SignUpState extends State<SignUp> {
                 ]),
           ),
           Container(
-            height: 30,
-            margin: EdgeInsets.only(bottom: 20),
+            height: 60,
+            margin: EdgeInsets.only(bottom: 3),
             width: MediaQuery.of(context).size.width * 0.8,
             child: TextField(
-              controller: _username,
+              controller: _email,
               decoration: InputDecoration(
-                errorText: (_nameValidate) ? 'Username Can\'t Be Empty' : null,
+                errorText: _emailValidate,
                 filled: true,
                 fillColor: Color.fromARGB(255, 237, 236, 236),
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(10),
                 ),
-                hintText: 'Enter your email',
+                hintText: 'Nhập email của bạn',
                 hintStyle: TextStyle(
                   fontSize: 13,
                   color: Color.fromARGB(255, 146, 144, 144),
@@ -92,19 +82,19 @@ class _SignUpState extends State<SignUp> {
             ),
           ),
           Container(
-            height: 30,
-            margin: EdgeInsets.only(bottom: 20),
+            height: 60,
+            margin: EdgeInsets.only(bottom: 3),
             width: MediaQuery.of(context).size.width * 0.8,
             child: TextField(
-              controller: _username,
+              controller: _phoneNumber,
               decoration: InputDecoration(
-                // errorText: (_nameValidate) ? 'Username Can\'t Be Empty' : null,
+                errorText: _phoneValidate,
                 filled: true,
                 fillColor: Color.fromARGB(255, 237, 236, 236),
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(10),
                 ),
-                hintText: 'Enter your phone number',
+                hintText: 'Nhập số điện thoại của bạn',
                 hintStyle: TextStyle(
                   fontSize: 13,
                   color: Color.fromARGB(255, 146, 144, 144),
@@ -113,40 +103,37 @@ class _SignUpState extends State<SignUp> {
             ),
           ),
           Container(
-            margin: EdgeInsets.only(bottom: 10),
-            height: 30,
-            width: MediaQuery.of(context).size.width * 0.8,
-            child: TextField(
-              controller: _pas,
-              decoration: InputDecoration(
-                errorText: (_passValidate) ? 'Password Can\'t Be Empty' : null,
-                filled: true,
-                fillColor: Color.fromARGB(255, 237, 236, 236),
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(10),
-                ),
-                hintText: 'Enter your password',
-                hintStyle: TextStyle(
-                  fontSize: 13,
-                  color: Color.fromARGB(255, 146, 144, 144),
-                ),
-              ),
-            ),
-          ),
-          Container(
-            margin: EdgeInsets.only(bottom: 10),
-            height: 30,
+            height: 60,
+            margin: EdgeInsets.only(bottom: 3),
             width: MediaQuery.of(context).size.width * 0.8,
             child: TextField(
               controller: _pas,
+              obscureText: passenable,
               decoration: InputDecoration(
-                // errorText: (_passValidate) ? 'Password Can\'t Be Empty' : null,
+                errorText: _passValidate,
                 filled: true,
                 fillColor: Color.fromARGB(255, 237, 236, 236),
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(10),
                 ),
-                hintText: 'Confirm your password',
+                suffix: IconButton(
+                    onPressed: () {
+                      //add Icon button at end of TextField
+                      setState(() {
+                        //refresh UI
+                        if (passenable) {
+                          //if passenable == true, make it false
+                          passenable = false;
+                        } else {
+                          passenable =
+                              true; //if passenable == false, make it true
+                        }
+                      });
+                    },
+                    icon: Icon(passenable == true
+                        ? Icons.remove_red_eye
+                        : Icons.password)),
+                hintText: 'Nhập mật khẩu của bạn',
                 hintStyle: TextStyle(
                   fontSize: 13,
                   color: Color.fromARGB(255, 146, 144, 144),
@@ -155,19 +142,91 @@ class _SignUpState extends State<SignUp> {
             ),
           ),
           Container(
-            margin: EdgeInsets.only(bottom: 20),
-            height: 50,
+            height: 60,
+            margin: EdgeInsets.only(bottom: 10),
+            width: MediaQuery.of(context).size.width * 0.8,
+            child: TextField(
+              controller: _repas,
+              obscureText: passenable,
+              decoration: InputDecoration(
+                errorText: _repassValidate,
+                filled: true,
+                fillColor: Color.fromARGB(255, 237, 236, 236),
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(10),
+                ),
+                hintText: 'Xác nhận mật khẩu',
+                suffix: IconButton(
+                    onPressed: () {
+                      //add Icon button at end of TextField
+                      setState(() {
+                        //refresh UI
+                        if (passenable) {
+                          //if passenable == true, make it false
+                          passenable = false;
+                        } else {
+                          passenable =
+                              true; //if passenable == false, make it true
+                        }
+                      });
+                    },
+                    icon: Icon(passenable == true
+                        ? Icons.remove_red_eye
+                        : Icons.read_more_outlined)),
+                hintStyle: TextStyle(
+                  fontSize: 13,
+                  color: Color.fromARGB(255, 146, 144, 144),
+                ),
+              ),
+            ),
+          ),
+          Container(
+            height: 40,
+            margin: EdgeInsets.only(bottom: 3),
             width: MediaQuery.of(context).size.width * 0.5,
             child: ElevatedButton(
               onPressed: () {
                 setState(() {
-                  _username.text.isEmpty
-                      ? _nameValidate = true
-                      : _nameValidate = false;
-                  _pas.text.isEmpty
-                      ? _passValidate = true
-                      : _passValidate = false;
+                  _email.text.isEmpty
+                      ? _emailValidate = 'Email không được để trống'
+                      : (RegExp(r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$')
+                              .hasMatch(_email.text))
+                          ? _emailValidate = ''
+                          : _emailValidate = 'Email không hợp lệ';
                 });
+                setState(() {
+                  _phoneNumber.text.isEmpty
+                      ? _phoneValidate = 'Số điện thoại không được để trống'
+                      : (RegExp(r'(^(?:[+0]9)?[0-9]{10,12}$)')
+                              .hasMatch(_phoneNumber.text))
+                          ? _phoneValidate = ''
+                          : _phoneValidate = 'Số điện thoại không hợp lệ';
+                });
+                setState(() {
+                  _pas.text.isEmpty
+                      ? _passValidate = 'Mật khẩu không được để trống'
+                      : (RegExp(r'^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$')
+                              .hasMatch(_pas.text))
+                          ? _passValidate = ''
+                          : _passValidate =
+                              'Mật khẩu phải có ít nhất 8 ký tự, bao gồm chữ và số';
+                });
+                setState(() {
+                  _repas.text.isEmpty
+                      ? _repassValidate = 'Mật khẩu không được để trống'
+                      : (_repas.text == _pas.text)
+                          ? _repassValidate = ''
+                          : _repassValidate = 'Mật khẩu không khớp';
+                });
+                if (_emailValidate == '' &&
+                    _phoneValidate == '' &&
+                    _passValidate == '' &&
+                    _repassValidate == '') {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => SignIn()),
+                  );
+                }
               },
               child: Text("Sign up"),
               style: ElevatedButton.styleFrom(
@@ -232,12 +291,20 @@ class _SignUpState extends State<SignUp> {
                   color: Color.fromARGB(255, 146, 144, 144),
                 ),
               ),
-              Text(
-                "Sign in",
-                style: TextStyle(
-                  color: Color(0xffF473B9),
-                  decoration: TextDecoration.underline,
+              new GestureDetector(
+                child: Text(
+                  "Sign in",
+                  style: TextStyle(
+                    color: Color(0xffF473B9),
+                    decoration: TextDecoration.underline,
+                  ),
                 ),
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => SignIn()),
+                  );
+                },
               )
             ],
           ),

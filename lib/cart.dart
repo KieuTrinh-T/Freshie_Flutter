@@ -1,4 +1,5 @@
 // ignore_for_file: prefer_const_constructors, dead_code
+import 'package:flutter/cupertino.dart';
 
 import 'dart:ffi';
 import 'package:flutter_first_project/signIn.dart';
@@ -17,6 +18,8 @@ class Cart extends StatefulWidget {
 }
 
 class _CartState extends State<Cart> {
+  ScrollController _CartScrollController = ScrollController();
+
   static final List<CartItem> _cartItems = [
     CartItem("Kem Dưỡng Mắt OLAY Retinol 24 Tái Tạo Da Chống Lão Hóa Toàn Diện",
         2, 467000, "assets/images/1.webp"),
@@ -40,13 +43,16 @@ class _CartState extends State<Cart> {
     return Scaffold(
       body: Center(
           child: Column(children: <Widget>[
-        Container(
-          height: MediaQuery.of(context).size.height * 0.8,
-          width: MediaQuery.of(context).size.width,
-          child: ListView.builder(
-              itemCount: _cartItems.length,
-              itemBuilder: (BuildContext context, int index) =>
-                  createCart(context, index)),
+        SingleChildScrollView(
+          controller: _CartScrollController,
+          child: Container(
+            height: MediaQuery.of(context).size.height * 0.7,
+            width: MediaQuery.of(context).size.width,
+            child: ListView.builder(
+                itemCount: _cartItems.length,
+                itemBuilder: (BuildContext context, int index) =>
+                    createCart(context, index)),
+          ),
         ),
         Container(
             color: Color(0xff3AB0FF),
