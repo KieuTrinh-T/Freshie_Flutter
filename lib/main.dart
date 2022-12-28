@@ -10,6 +10,7 @@ import 'home.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/services.dart';
 import 'notifications.dart';
+import 'package:draggable_fab/draggable_fab.dart';
 
 void main() {
   runApp(MyApp());
@@ -113,17 +114,18 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
       appBar: createAppBar(
           context, _widgetOptions.elementAt(_selectedIndex).toString()),
       body: _widgetOptions.elementAt(_selectedIndex),
+
       floatingActionButtonLocation: showBtmAppBr
           ? FloatingActionButtonLocation.miniEndFloat
           : FloatingActionButtonLocation.startDocked,
-      floatingActionButton: FloatingActionButton(
+      floatingActionButton: DraggableFab(child: FloatingActionButton(
         backgroundColor: Color.fromARGB(255, 103, 191, 249),
         onPressed: () {},
         child: const Icon(
           CupertinoIcons.chat_bubble,
           color: Colors.white,
         ),
-      ),
+      )),
       bottomNavigationBar: AnimatedContainer(
         child: createBottomNavigation(),
         duration: const Duration(

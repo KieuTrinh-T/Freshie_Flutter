@@ -538,13 +538,14 @@ class Bestseller extends StatelessWidget {
           ),
           Text(
             bestseller.productName,
+            maxLines: 2,
             style: TextStyle(
               color: Colors.black,
             ),
           ),
           Text(
             bestseller.sold,
-            textAlign: TextAlign.start,
+            textAlign: TextAlign.center,
             style: TextStyle(
               color: Colors.black,
             ),

@@ -82,7 +82,7 @@ class _NotificationsState extends State<Notifications> {
       maxLines: 3,
       overflow: TextOverflow.ellipsis,
       text: TextSpan(
-        text: 'Message',
+        text: 'Message $index ',
         style: TextStyle(
           fontSize: textSize,
           color: Colors.black,

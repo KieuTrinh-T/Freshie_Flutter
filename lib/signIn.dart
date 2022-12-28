@@ -143,6 +143,12 @@ class _SignInState extends State<SignIn> {
                     _pas.text.isEmpty
                         ? _passValidate = true
                         : _passValidate = false;
+                    _nameValidate == false && _passValidate == false
+                        ? Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => MyStatefulWidget()))
+                        : null;
                   });
                 },
                 child: Text("Đăng nhập"),

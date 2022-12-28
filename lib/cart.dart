@@ -65,7 +65,7 @@ class _CartState extends State<Cart> {
                   child: Container(
                     height: MediaQuery.of(context).size.height -
                         AppBar().preferredSize.height -
-                        120,
+                    180,
                     width: MediaQuery.of(context).size.width,
                     child: ListView.builder(
                         itemCount: _cartItems.length,
@@ -97,6 +97,7 @@ class _CartState extends State<Cart> {
         ));
       },
       background: Container(
+        alignment: Alignment.centerRight,
         color: Colors.red,
         child: Icon(Icons.delete),
       ),
